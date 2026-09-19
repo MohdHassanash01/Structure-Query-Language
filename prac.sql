@@ -345,3 +345,131 @@ upper(category)
 from products
 order by upper(category) DESC;
 
+
+
+
+
+-- Alter Table
+
+
+create table students(
+student_id serial primary key,
+name varchar(100),
+age bigint
+)
+
+
+
+insert into students(name,age)
+values('hassan',23),
+('ashraf',24);
+
+
+select * from students;
+
+
+-- 1. Add new column
+
+Alter Table students
+ADD COLUMN email varchar(100);
+
+
+select * from students;
+
+-- for default value
+
+Alter Table students
+ADD COLUMN email varchar(100)
+default 'not provided';
+
+
+
+-- 2. remove a column 
+
+alter table students
+drop column email;
+
+
+-- 3. rename a column
+
+alter table students
+rename column student_id to id;
+
+select * from students;
+
+
+-- 4. change data type of a column
+
+alter table students
+alter column age type int;
+
+select * from students;
+
+
+-- 5. set a default value
+
+alter table students
+alter column email 
+set default 'example@gmail.com';
+
+
+-- 6. Remove a default value
+
+alter Table students
+alter column email drop default;
+
+
+-- 7. add a constraint
+
+alter table students
+add constraint age_check check(age >= 0);
+
+
+-- 8 drop a constrait
+
+alter table students
+drop constraint age_check;
+
+
+-- 9 rename the table
+
+alter table students
+rename to studentsDB;
+
+
+
+-- ---------------------------------------
+
+
+
+
+--  case 
+
+select * from products;
+
+
+select name, price,
+case
+    when (price > 2000) then 'expensive'
+	when price between 500 and 2000 then 'moderate'
+    else 'cheap'
+	end as price_tag
+from products;	
+  
+
+
+alter table products
+add column price_tag text;
+
+
+update products
+set price_tag = 
+case
+    when (price > 2000) then 'expensive'
+	when price between 500 and 2000 then 'moderate'
+    else 'cheap'
+	end
+
+
+
+
