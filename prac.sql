@@ -473,3 +473,122 @@ case
 
 
 
+-- relationship
+
+create table students(
+student_id serial primary key,
+name varchar(100) not null
+)
+
+insert into students(name)
+values('hassan ashraf'),
+('mariya bano'),
+('ayesha siddiqua');
+
+
+select * from students;
+
+
+
+create table student_profile(
+student_id int primary key,
+email varchar(100),
+age int,
+phone varchar(50)
+)
+
+insert into student_profile 
+(student_id, email, age, phone)
+values
+(1,'hassan@gmail.com',24,'6306cjdwbchj'),
+(2,'mariya@gmail.com',22,'6393wbchj'),
+(3,'siddiqua@gmail.com',19,'831po098j');
+
+
+select * from student_profile;
+
+
+alter table student_profile
+add constraint fk_student_id
+foreign key (student_id)
+references students(student_id);
+
+
+select * from students;
+select * from student_profile;
+
+
+select 
+s.student_id,
+s.name,
+sp.email,
+sp.age
+from students s
+join student_profile sp
+on s.student_id = sp.student_id;
+
+
+
+-- one to many
+
+create table marks(
+mark_id serial primary key,
+student_id int,
+subject varchar(100),
+marks int,
+
+foreign key (student_id) 
+references students(student_id)
+)
+
+
+insert into marks
+(student_id,subject,marks)
+values
+(1,'english',85),
+(1,'Math',89),
+(1,'science',92),
+
+(2,'english',80),
+(2,'Math',75),
+(2,'science',78),
+
+(3,'english',87),
+(3,'Math',45),
+(3,'science',68);
+
+
+
+
+-- inner join 
+
+select 
+s.student_id,
+s.name,
+m.subject,
+m.marks
+from students s
+join marks m
+on s.student_id = m.student_id;
+
+
+
+-- left join
+
+-- for example new student enroll he did'nt give any exam
+
+insert into students(name)
+values('dawood')
+
+select 
+s.student_id,
+s.name,
+m.subject,
+m.marks
+from students s
+left join marks m
+on s.student_id = m.student_id;
+
+
+
+
