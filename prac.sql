@@ -592,3 +592,84 @@ on s.student_id = m.student_id;
 
 
 
+
+-- right join
+
+insert into marks
+(student_id,subject,marks)
+values
+(5,'english',85),
+(5,'Math',89),
+(5,'science',92);
+
+-- you cannot insert new data because you dont 
+-- have 5 student_id
+
+
+select 
+s.student_id,
+s.name,
+m.subject,
+m.marks
+from students s
+right join marks m
+on s.student_id = m.student_id;
+
+
+--  full join
+
+
+select 
+s.student_id,
+s.name,
+m.subject,
+m.marks
+from students s
+full join marks m
+on s.student_id = m.student_id;
+
+
+
+-- cross join
+
+select 
+s.student_id,
+s.name,
+m.subject,
+m.marks
+from students s
+cross join marks m
+
+
+
+
+-- question 1
+
+
+
+select 
+s.name,
+m.subject,
+m.marks
+from students s
+join marks m
+on s.student_id = m.student_id;
+
+
+--  ques 2
+
+
+select 
+s.name,
+m.subject,
+m.marks
+from students s
+join marks m
+on s.student_id = m.student_id
+where name = 'hassan ashraf';
+
+
+
+
+
+
